@@ -2,32 +2,21 @@ import React, { useState } from "react";
 import { Button, Container, Row, Card, Col, Form } from "react-bootstrap";
 
 const Register = () => {
-  const [userList,setUserList] = useState({
-    user:{
-    username:"",
-    password:"",
-    phonenumber:""
-    }
-  })
+const[state,setState]=useState({
+  count:0
+});
 
-  const updateDetails=(event)=>{
-    setUserList( {
-      ...userList,
-      user:{
-        ...userList.user,
-        [event.target.name]:event.target.value
-      }
-    })
+const incrementer=()=>{
+setState({
+  count:state.count+1}
+)
+}
+const decrementer=()=>{
+  setState({
+    count:state.count+1}
+  )
   }
-
-  const submit=(event)=>{
-    event.preventDefault();
-  }
-
-  const register=(event)=>{
-    event.preventDefault();
-    console.log(userList.user)
-  }
+  
 
   return (
     <>
@@ -35,44 +24,12 @@ const Register = () => {
         <Row>
           <Col xs={5}>
             <Card className="shadow-lg">
-              <Card.Header style={{ backgroundColor: "lightgreen" }}>
-                <h1>Registration Form</h1>
-              </Card.Header>
-              <Card.Body>
-                <Form onSubmit={submit}>
-                  <Form.Group className="mb-3">
-                    <Form.Label> Username</Form.Label>
-                    <Form.Control
-                    name="username"
-                      onChange={updateDetails}
-                      type="text"
-                      placeholder="Username"
-                    ></Form.Control>
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label> Password</Form.Label>
-                    <Form.Control
-                    name="password"
-                      onChange={updateDetails}
-                      type="text"
-                      placeholder="password"
-                    ></Form.Control>
-                    <Form.Text type="text">
-                      Must contain atleast one numeric and Capital letter
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group className="mb-3">
-                    <Form.Label> phonenumber</Form.Label>
-                    <Form.Control
-                    name="phonenumber"
-                      onChange={updateDetails}
-                      type="number"
-                      placeholder="phonenumber"
-                    ></Form.Control>
-                  </Form.Group>
-                  <Button onClick={register} type="submit">Confirm</Button>
-                </Form>
-              </Card.Body>
+                 <Card.Body>
+                      <h1>{state.count}</h1>
+                 <Button onClick={incrementer} variant="success" className="m-1">Incre</Button>
+                 <Button onClick={decrementer} variant="danger" className="m-1">decre</Button>
+                 </Card.Body>
+                
             </Card>
           </Col>
         </Row>
