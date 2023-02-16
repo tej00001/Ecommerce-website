@@ -6,6 +6,8 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
 
+
+
   const UserHandler = (event) => {
     setUsername(event.target.value);
     console.log(event.target.value);
@@ -20,9 +22,14 @@ const Register = (props) => {
   };
   const submit = (event) => {
     event.preventDefault();
-
-    props.onAdd(username, password, phonenumber);
+    const UserList={
+      Name:username,
+      Phone:phonenumber,
+      password:password,
+    }
+   console.log(UserList)
   };
+
 
   return (
     <>
@@ -62,7 +69,7 @@ const Register = (props) => {
                       placeholder="phonenumber"
                     ></Form.Control>
                   </Form.Group>
-                  <Button type="submit">Confirm</Button>
+                  <Button  type="submit">Confirm</Button>
                 </Form>
               </Card.Body>
             </Card>
