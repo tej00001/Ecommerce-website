@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{ useState } from "react";
+import "./App.css";
+import { Alert, Container, Navbar } from "react-bootstrap";
+import Register from "./Components/Register";
 
-function App() {
+let App = () => {
+  const[userList,setUserList]=useState([]);
+
+  const onscreenHandler=(uname,upass,uphone)=>{
+    setUserList((prevList)=>{
+      return[
+        ...prevList, {
+          username:uname,password:upass,phonenumber:uphone,id:Math.random().toString()
+        },
+      ]
+    })
+   }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar bg="primary" expand="sm" variant="dark">
+        <Container>
+          <Navbar.Brand href="/"> Started React Bootstrap</Navbar.Brand>
+        </Container>
+      </Navbar>
+      <Alert variant="success">This is a alert—check it out!</Alert>
+      <Register onAdd={onscreenHandler}/>
+       {
+       userList.map((user) => {
+        return (
+          <li key={user.id}>
+            {user.username} ({user.phonenumber})
+          </li>
+        );
+      })
+    }
+      
+    </>
   );
-}
+};
 
 export default App;
