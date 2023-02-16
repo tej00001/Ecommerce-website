@@ -1,35 +1,33 @@
 import React, { useState } from "react";
 import { Button, Container, Row, Card, Col, Form } from "react-bootstrap";
 
-const Register = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-
-
-
-  const UserHandler = (event) => {
-    setUsername(event.target.value);
-    console.log(event.target.value);
-  };
-  const passwordHandler = (event) => {
-    setPassword(event.target.value);
-    console.log(event.target.value);
-  };
-  const phonenumberHandler = (event) => {
-    setPhonenumber(event.target.value);
-    console.log(event.target.value);
-  };
-  const submit = (event) => {
-    event.preventDefault();
-    const UserList={
-      Name:username,
-      Phone:phonenumber,
-      password:password,
+const Register = () => {
+  const [userList,setUserList] = useState({
+    user:{
+    username:"",
+    password:"",
+    phonenumber:""
     }
-   console.log(UserList)
-  };
+  })
 
+  const updateDetails=(event)=>{
+    setUserList( {
+      ...userList,
+      user:{
+        ...userList.user,
+        [event.target.name]:event.target.value
+      }
+    })
+  }
+
+  const submit=(event)=>{
+    event.preventDefault();
+  }
+
+  const register=(event)=>{
+    event.preventDefault();
+    console.log(userList.user)
+  }
 
   return (
     <>
@@ -45,7 +43,8 @@ const Register = (props) => {
                   <Form.Group className="mb-3">
                     <Form.Label> Username</Form.Label>
                     <Form.Control
-                      onChange={UserHandler}
+                    name="username"
+                      onChange={updateDetails}
                       type="text"
                       placeholder="Username"
                     ></Form.Control>
@@ -53,9 +52,10 @@ const Register = (props) => {
                   <Form.Group className="mb-3">
                     <Form.Label> Password</Form.Label>
                     <Form.Control
-                      onChange={passwordHandler}
+                    name="password"
+                      onChange={updateDetails}
                       type="text"
-                      placeholder="passwaord"
+                      placeholder="password"
                     ></Form.Control>
                     <Form.Text type="text">
                       Must contain atleast one numeric and Capital letter
@@ -64,12 +64,13 @@ const Register = (props) => {
                   <Form.Group className="mb-3">
                     <Form.Label> phonenumber</Form.Label>
                     <Form.Control
-                      onChange={phonenumberHandler}
+                    name="phonenumber"
+                      onChange={updateDetails}
                       type="number"
                       placeholder="phonenumber"
                     ></Form.Control>
                   </Form.Group>
-                  <Button  type="submit">Confirm</Button>
+                  <Button onClick={register} type="submit">Confirm</Button>
                 </Form>
               </Card.Body>
             </Card>
