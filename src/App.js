@@ -1,40 +1,60 @@
-import React,{ useState } from "react";
-import "./App.css";
-import { Alert, Container, Navbar } from "react-bootstrap";
+import React from "react";
+import { Container, Button } from "react-bootstrap";
 import Register from "./Components/Register";
+import NavbarList from "./Components/Navbar";
+import ProductList from "./Components/ProductList";
 
-let App = () => {
-  const[userList,setUserList]=useState([]);
+const productsArr = [
+  {
+    title: "Colors",
 
-  const onscreenHandler=(uname,upass,uphone)=>{
-    setUserList((prevList)=>{
-      return[
-        ...prevList, {
-          username:uname,password:upass,phonenumber:uphone,id:Math.random().toString()
-        },
-      ]
-    })
-   }
+    price: 100,
+
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+  },
+
+  {
+    title: "Black and white Colors",
+
+    price: 50,
+
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+  },
+
+  {
+    title: "Yellow and Black Colors",
+
+    price: 70,
+
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+  },
+
+  {
+    title: "Blue Color",
+
+    price: 100,
+
+    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+  },
+];
+
+const App = () => {
+  const ProductsDetails = productsArr.map((item) => (
+    <ProductList
+      title={item.title}
+      imageUrl={item.imageUrl}
+      price={item.price}
+    />
+  ));
 
   return (
     <>
-      <Navbar bg="primary" expand="sm" variant="dark">
-        <Container>
-          <Navbar.Brand href="/"> Started React Bootstrap</Navbar.Brand>
-        </Container>
-      </Navbar>
-      <Alert variant="success">This is a alert—check it out!</Alert>
-      <Register onAdd={onscreenHandler}/>
-       {
-       userList.map((user) => {
-        return (
-          <li key={user.id}>
-            {user.username} ({user.phonenumber})
-          </li>
-        );
-      })
-    }
-      
+      <Register />
+      <span>{ProductsDetails}</span>
+      <Container className="justify-content-left me-4">
+        <Button className="btn-dark btn-outline-warning">See the Cart</Button>
+      </Container>
+      <NavbarList />
     </>
   );
 };

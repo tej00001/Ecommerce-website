@@ -1,0 +1,10 @@
+.title {
+  text-align: center;
+}
+
+.title h1 {
+  color: red;
+  font-size: 40px;
+  font-family: Georgia;
+  font-weight: bold;
+}
